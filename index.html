@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Natalia Maltsev — Paintings</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,340..600;1,9..144,400..500&family=Work+Sans:wght@350;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#e5e2d9;
+    --bg-panel:#dcd9cd;
+    --ink:#1d1c19;
+    --ink-soft:#55534b;
+    --line:#c4c0b1;
+    --moss:#4f5f45;
+    --rust:#96543a;
+    --paper:#f4f2ea;
+    box-sizing:border-box;
+    padding-top:env(safe-area-inset-top,0px);
+    padding-bottom:env(safe-area-inset-bottom,0px);
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#1c1b18; --bg-panel:#242320; --ink:#eeece4; --ink-soft:#b3b0a4;
+      --line:#3a382f; --paper:#242320;
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#1c1b18; --bg-panel:#242320; --ink:#eeece4; --ink-soft:#b3b0a4;
+    --line:#3a382f; --paper:#242320;
+  }
+  *{box-sizing:border-box}
+  html{scroll-padding-top:env(safe-area-inset-top,0px)}
+  html,body{height:100%}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:'Work Sans',system-ui,sans-serif; font-weight:350;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,.display{font-family:'Fraunces',Georgia,serif; font-weight:440; letter-spacing:-0.01em;}
+  a{color:inherit}
+  .wrap{max-width:1160px; margin:0 auto; padding:0 28px;}
+
+  /* ---- Nav ---- */
+  header.site{
+    position:sticky; top:0; top:env(safe-area-inset-top,0px);
+    z-index:40; background:var(--bg); border-bottom:1px solid var(--line);
+  }
+  .navrow{
+    max-width:1160px; margin:0 auto; padding:18px 28px;
+    display:flex; align-items:baseline; justify-content:space-between; gap:20px;
+  }
+  .word-mark{font-family:'Fraunces',serif; font-size:20px; font-style:italic; font-weight:450; text-decoration:none; white-space:nowrap;}
+  nav.pages{display:flex; gap:26px; flex-wrap:wrap;}
+  nav.pages button{
+    background:none; border:none; font-family:'Work Sans',sans-serif; font-size:15px;
+    color:var(--ink-soft); cursor:pointer; padding:4px 0; position:relative;
+  }
+  nav.pages button.active{color:var(--ink);}
+  nav.pages button.active::after{
+    content:""; position:absolute; left:0; right:0; bottom:-2px; height:1px; background:var(--rust);
+  }
+
+  main{min-height:70vh;}
+  .page{display:none; animation:fade .35s ease;}
+  .page.active{display:block;}
+  @keyframes fade{from{opacity:0; transform:translateY(6px)} to{opacity:1; transform:translateY(0)}}
+  @media (prefers-reduced-motion: reduce){.page{animation:none}}
+
+  /* ---- Gallery / Work overview page ---- */
+  .gallery-intro{padding:56px 0 30px;}
+  .gallery-intro h1{font-size:clamp(30px,5vw,46px); max-width:14ch; margin:0 0 14px;}
+  .gallery-intro p{max-width:56ch; color:var(--ink-soft); font-size:16px; line-height:1.6; margin:0;}
+
+  .group-list{padding-bottom:80px; display:flex; flex-direction:column;}
+  .group-card{
+    display:grid; grid-template-columns:auto 1fr auto; align-items:center; gap:22px;
+    border-top:1px solid var(--line); padding:24px 0; background:none; border-left:none; border-right:none; border-bottom:none;
+    text-align:left; cursor:pointer; font:inherit; color:inherit; width:100%;
+  }
+  .group-list .group-card:last-child{border-bottom:1px solid var(--line);}
+  .group-card .g-thumb{
+    width:88px; height:88px; border-radius:2px; overflow:hidden; background:var(--bg-panel); flex-shrink:0;
+  }
+  .group-card .g-thumb img{width:100%; height:100%; object-fit:cover; display:block;}
+  .group-card .g-name{font-family:'Fraunces',serif; font-size:26px; margin:0 0 6px;}
+  .group-card .g-blurb{margin:0; color:var(--ink-soft); font-size:14.5px; max-width:48ch;}
+  .group-card .g-count{color:var(--ink-soft); font-size:13px; margin-top:8px;}
+  .group-card .g-arrow{font-size:26px; color:var(--rust); font-family:'Fraunces',serif; flex-shrink:0;}
+  .group-card:hover .g-name{color:var(--rust);}
+  @media (max-width:520px){.group-card{grid-template-columns:auto 1fr;} .g-arrow{display:none;}}
+
+  .back-link{
+    display:inline-block; margin:44px 0 10px; font-size:14px; color:var(--ink-soft);
+    text-decoration:none; cursor:pointer;
+  }
+  .back-link:hover{color:var(--ink);}
+
+  .category-head{
+    display:flex; justify-content:space-between; align-items:baseline; gap:24px;
+    padding-top:10px; margin-bottom:32px;
+  }
+  .category-head h2{font-size:30px; margin:0; font-family:'Fraunces',serif;}
+  .category-head p{margin:0; color:var(--ink-soft); font-size:14px; max-width:34ch; text-align:right;}
+  @media (max-width:640px){.category-head{flex-direction:column; align-items:flex-start;} .category-head p{text-align:left;}}
+  #category .grid{padding-bottom:80px;}
+
+  .grid{
+    display:grid; grid-template-columns:repeat(auto-fill, minmax(230px,1fr));
+    gap:34px 26px;
+  }
+  .card{cursor:pointer; border:none; background:none; text-align:left; padding:0; font:inherit; color:inherit;}
+  .plate{
+    aspect-ratio:4/5; border-radius:2px; overflow:hidden; background:var(--bg-panel);
+    border:1px solid var(--line);
+  }
+  .plate img{display:block; width:100%; height:100%; object-fit:cover;}
+  .label{margin-top:12px; display:flex; justify-content:space-between; gap:10px; align-items:baseline;}
+  .label .t{font-size:15px;}
+  .label .t .series{color:var(--ink-soft); font-size:13px; display:block; margin-top:1px;}
+  .label .y{font-size:13px; color:var(--ink-soft); flex-shrink:0;}
+  .card:focus-visible .plate{outline:2px solid var(--rust); outline-offset:2px;}
+
+  /* ---- Lightbox ---- */
+  .lightbox{
+    position:fixed; inset:0; z-index:60; display:none; place-items:center;
+    background:rgba(20,19,16,.72); padding:24px; padding-top:calc(24px + env(safe-area-inset-top,0px));
+    padding-bottom:calc(24px + env(safe-area-inset-bottom,0px));
+    overflow-y:auto;
+  }
+  .lightbox{
+    transform: translateZ(0);
+    will-change: transform;
+  }
+  .lightbox.open{display:grid;}
+  .lb-card{
+    background:var(--paper); color:var(--ink); max-width:920px; width:100%;
+    border-radius:3px; display:grid; grid-template-columns:1.15fr 28px 1fr; overflow:hidden;
+    transition:grid-template-columns .25s ease;
+  }
+  @media (max-width:720px){.lb-card{grid-template-columns:1fr;} .lb-info-toggle{display:none;}}
+  .lb-card.info-hidden{grid-template-columns:1fr 28px 0fr;}
+  .lb-card.info-hidden .lb-info{display:none;}
+  .lb-art-wrap{background:var(--bg-panel); display:flex; flex-direction:column; position:relative; padding:10px;max-height:99vh;}
+  .lb-art{max-height:90vh; background:#000; position:relative;}
+  /* .lb-art{padding:10px; background:var(--bg-panel);} */
+  .lb-art img{display:block; width:100%; height:100%; object-fit:contain; background:var(--bg-panel);}
+  .lb-info-toggle{
+    grid-column:2; width:100%; height:100%; padding:0; cursor:pointer;
+    border:none; border-left:1px solid var(--line); border-right:1px solid var(--line);
+    background:var(--paper); color:var(--ink-soft);
+    font-family:'Fraunces',serif; font-size:16px; display:flex; align-items:center; justify-content:center;
+  }
+  .lb-info-toggle:hover{color:var(--ink); background:var(--bg-panel);}
+  .lb-caption{margin:0; padding:10px 14px 0; font-size:12.5px; color:var(--ink-soft);}
+  .lb-thumbs{display:flex; gap:8px; padding:10px 14px 14px; flex-wrap:wrap;}
+  .lb-thumbs button{
+    width:46px; height:46px; padding:0; border-radius:2px; overflow:hidden; cursor:pointer;
+    border:2px solid transparent; background:none; opacity:.6;
+  }
+  .lb-thumbs button.active{border-color:var(--rust); opacity:1;}
+  .lb-thumbs button:hover{opacity:1;}
+  .lb-thumbs img{display:block; width:100%; height:100%; object-fit:cover;}
+  .lb-info{padding:34px 32px; position:relative;}
+  .lb-info h2{font-size:24px; margin:0 0 4px;}
+  .lb-info .series-tag{color:var(--rust); font-size:14px; margin:0 0 18px;}
+  dl.details{margin:0 0 20px; font-size:14.5px;}
+  dl.details div{display:flex; gap:10px; padding:6px 0; border-top:1px solid var(--line);}
+  dl.details dt{color:var(--ink-soft); width:100px; flex-shrink:0;}
+  dl.details dd{margin:0;}
+  .lb-info p.desc{font-size:15px; line-height:1.65; color:var(--ink-soft); margin:0;}
+  .lb-close{
+    position:absolute; top:16px; right:16px; background:none; border:1px solid var(--line);
+    width:32px; height:32px; border-radius:50%; cursor:pointer; font-size:16px; line-height:1; color:var(--ink);
+  }
+
+  /* ---- About page ---- */
+  .about{padding:56px 0 80px; display:grid; grid-template-columns:1fr 1.3fr; gap:60px;}
+  .about-figure img{width:100%; height:100%; object-fit:cover; display:block;}
+  @media (max-width:760px){.about{grid-template-columns:1fr; gap:36px;}}
+  .about-figure{aspect-ratio:3/4; border-radius:2px; overflow:hidden; background:var(--bg-panel); border:1px solid var(--line); align-self:start;}
+  .about-figure svg{width:100%; height:100%; display:block;}
+  .about h1{font-size:clamp(28px,4vw,38px); margin:0 0 18px;}
+  .about .bio p{font-size:16px; line-height:1.7; color:var(--ink-soft); margin:0 0 16px;}
+  .about section.block{margin-top:38px;}
+  .about h3{font-size:14px; text-transform:none; letter-spacing:.02em; margin:0 0 14px; color:var(--ink);}
+  ul.plain{list-style:none; margin:0; padding:0;}
+  ul.plain li{
+    display:flex; gap:16px; padding:11px 0; border-top:1px solid var(--line); font-size:14.5px;
+  }
+  ul.plain li:last-child{border-bottom:1px solid var(--line);}
+  ul.plain .yr{color:var(--rust); width:48px; flex-shrink:0;}
+  ul.plain .what{color:var(--ink);}
+  ul.plain .where{color:var(--ink-soft); display:block; font-size:13.5px; margin-top:2px;}
+  .subgroup{margin-bottom:22px;}
+  .subgroup:last-child{margin-bottom:0;}
+  .subgroup h4{font-size:13px; color:var(--ink-soft); font-weight:500; margin:0 0 4px;}
+
+  /* ---- Contact page ---- */
+  .contact{padding:60px 0 90px; max-width:520px;}
+  .contact h1{font-size:clamp(28px,4vw,38px); margin:0 0 18px;}
+  .contact p.lead{color:var(--ink-soft); font-size:16px; line-height:1.65; margin:0 0 34px;}
+  .contact dl{margin:0;}
+  .contact dl div{padding:16px 0; border-top:1px solid var(--line);}
+  .contact dl div:last-child{border-bottom:1px solid var(--line);}
+  .contact dt{font-size:12.5px; color:var(--ink-soft); margin-bottom:4px;}
+  .contact dd{margin:0; font-size:16px;}
+  .contact a.link{text-decoration:none; border-bottom:1px solid var(--rust);}
+
+  footer{border-top:1px solid var(--line); padding:22px 0; font-size:12.5px; color:var(--ink-soft);}
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="navrow">
+    <a class="word-mark" href="#work" data-nav="work">Natalia Maltsev</a>
+    <nav class="pages">
+      <button data-nav="work" class="active">Work</button>
+      <button data-nav="about">About</button>
+      <button data-nav="contact">Contact</button>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section id="work" class="page active">
+    <div class="gallery-intro">
+      <h1 id="gallery-title"></h1>
+      <p id="gallery-intro-text"></p>
+    </div>
+    <div class="group-list" id="group-list"></div>
+  </section>
+
+  <section id="category" class="page">
+    <a href="#work" class="back-link" data-nav="work">← All work</a>
+    <div class="category-head" id="category-head-standalone">
+      <h2 id="category-title"></h2>
+      <p id="category-blurb"></p>
+    </div>
+    <div class="grid" id="category-grid"></div>
+  </section>
+
+  <section id="about" class="page">
+    <div class="about">
+      <div class="about-figure" id="about-figure"></div>
+      <div>
+        <h1 id="about-name"></h1>
+        <div class="bio" id="about-bio"></div>
+
+        <section class="block">
+          <h3>Education</h3>
+          <ul class="plain" id="education-list"></ul>
+        </section>
+
+        <section class="block">
+          <h3>Exhibitions</h3>
+          <div id="exhibitions-groups"></div>
+        </section>
+
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="page">
+    <div class="contact">
+      <h1>Contact</h1>
+      <p class="lead" id="contact-lead"></p>
+      <dl id="contact-list"></dl>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap" id="footer-text"></div>
+</footer>
+
+<div class="lightbox" id="lightbox">
+  <div class="lb-card">
+    <div class="lb-art-wrap">
+      <div class="lb-art" id="lb-art"></div>
+      <p class="lb-caption" id="lb-caption"></p>
+      <div class="lb-thumbs" id="lb-thumbs"></div>
+    </div>
+    <button class="lb-info-toggle" id="lb-info-toggle" aria-label="Hide picture info" aria-pressed="false">&lt;</button>
+    <div class="lb-info" id="lb-info-tab">
+      <button class="lb-close" id="lb-close" aria-label="Close">✕</button>
+      <p class="series-tag" id="lb-series"></p>
+      <h2 id="lb-title"></h2>
+      <dl class="details" id="lb-details"></dl>
+      <p class="desc" id="lb-desc"></p>
+    </div>
+  </div>
+</div>
+
+<script src="images.js"></script>
+<script src="content.js" ></script>
+<script src="utilities.js" ></script>
+
+</body>
+</html>
