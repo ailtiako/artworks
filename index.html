@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Natalia Maltsev — Paintings</title>
+<title>Natalia Maltseva— Art Showcase</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,340..600;1,9..144,400..500&family=Work+Sans:wght@350;400;500;600&display=swap" rel="stylesheet">
@@ -154,6 +154,20 @@
     font-family:'Fraunces',serif; font-size:16px; display:flex; align-items:center; justify-content:center;
   }
   .lb-info-toggle:hover{color:var(--ink); background:var(--bg-panel);}
+  /* tooltips (text comes from CONTENT.ui via data-tip) */
+  [data-tip]{position:relative;}
+  [data-tip]::after{
+    content:attr(data-tip); position:absolute; z-index:5; pointer-events:none;
+    background:var(--ink); color:var(--paper); font-family:'Work Sans',sans-serif; font-size:12px; font-style:normal;
+    line-height:1; padding:6px 9px; border-radius:3px; white-space:nowrap;
+    opacity:0; transition:opacity .15s ease .25s;
+  }
+  [data-tip]:hover::after,[data-tip]:focus-visible::after{opacity:1;}
+  .lb-close[data-tip]::after{top:calc(100% + 6px); right:0;}
+  .lb-info-toggle[data-tip]::after{right:calc(100% + 6px); top:50%; transform:translateY(-50%);}
+
+
+
   .lb-caption{margin:0; padding:10px 14px 0; font-size:12.5px; color:var(--ink-soft);}
   .lb-thumbs{display:flex; gap:8px; padding:10px 14px 14px; flex-wrap:wrap;}
   .lb-thumbs button{
@@ -216,7 +230,7 @@
 
 <header class="site">
   <div class="navrow">
-    <a class="word-mark" href="#work" data-nav="work">Natalia Maltsev</a>
+    <a class="word-mark" href="#work" data-nav="work">Natalia Maltseva</a>
     <nav class="pages">
       <button data-nav="work" class="active">Work</button>
       <button data-nav="about">About</button>
@@ -236,7 +250,7 @@
   </section>
 
   <section id="category" class="page">
-    <a href="#work" class="back-link" data-nav="work">← All work</a>
+    <a href="#work" class="back-link" data-nav="work">← Art Showcase</a>
     <div class="category-head" id="category-head-standalone">
       <h2 id="category-title"></h2>
       <p id="category-blurb"></p>
@@ -286,9 +300,9 @@
       <p class="lb-caption" id="lb-caption"></p>
       <div class="lb-thumbs" id="lb-thumbs"></div>
     </div>
-    <button class="lb-info-toggle" id="lb-info-toggle" aria-label="Hide picture info" aria-pressed="false">&lt;</button>
-    <div class="lb-info" id="lb-info-tab">
-      <button class="lb-close" id="lb-close" aria-label="Close">✕</button>
+    <button class="lb-info-toggle" id="lb-info-toggle" aria-pressed="false">&lt;</button>
+    <div class="lb-info">
+      <button class="lb-close" id="lb-close">✕</button>
       <p class="series-tag" id="lb-series"></p>
       <h2 id="lb-title"></h2>
       <dl class="details" id="lb-details"></dl>

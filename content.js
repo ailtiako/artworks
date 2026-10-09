@@ -6,13 +6,13 @@
    ============================================================ */
    const CONTENT = {
     artist: {
-      name: "Natalia Maltsev",
-      tagline: "Paintings in oil",
-      galleryIntro: "Recent paintings, arranged by subject. Choose a group to see the work it contains.",
+      name: "Natalia Maltseva",
+      tagline: "Paintings, watercolour and graphics",
+      galleryIntro: "Selected works arranged by medium, technique or theme. Some items may appear in different collections.",
       bioParagraphs: [
         "bio TODO"
       ],
-      footer: "© Natalia Maltsev. All works shown remain the property of the artist unless noted as sold.",
+      footer: "© Natalia Maltseva. All works shown remain the property of the artist unless noted as sold.",
       contactLead: "For studio visits, commission enquiries or exhibition proposals, get in touch directly — replies usually take a few days."
     },
   
@@ -21,12 +21,22 @@
       detail1: "Detail",
       detail2: "Detail"
     },
+
+    ui: {
+      close: "Close",
+      hideInfo: "Hide info",
+      showInfo: "Show info"
+    },
   
     categories: [
+      { id: "oil", label: "Oil&Canvas", blurb: "Selected oil paintings" },
+      { id: "watercolor", label: "Watercolor", blurb: "TODO" },
       { id: "landscape", label: "Landscape", blurb: "TODO" },
-      { id: "portrait", label: "Portrait", blurb: "TODO" },
+      { id: "pleinair", label: "Plein Air", blurb: "TODO" },
       { id: "stilllife", label: "Still Life", blurb: "TODO" },
-      { id: "flowers", label: "Flowers", blurb: "TODO" }
+      { id: "flowers", label: "Flowers", blurb: "TODO" },
+      { id: "portrait", label: "Portrait", blurb: "TODO" },
+      { id: "stpb", label: "St Petersburg", blurb: "TODO" }
     ],
   
     education: [
@@ -213,7 +223,28 @@
           { key: "img_1109_main", label: "" }        ]
       },
       {
-        id: "img_1215", title: "TBD", series: "", year: "todo", category: "flowers",
+        id: "img_1215", title: "TBD", series: "", year: "todo", category: "pleinair",
+        medium: "Oil on canvas", dimensions: "Dimensions on request", status: "Private Collection",
+        description: "",
+        images: [
+          { key: "img_1215_main", label: "" }        ]
+      },
+      {
+        id: "img_1215", title: "TBD", series: "", year: "todo", category: "stpb",
+        medium: "Oil on canvas", dimensions: "Dimensions on request", status: "Private Collection",
+        description: "",
+        images: [
+          { key: "img_1215_main", label: "" }        ]
+      },
+      {
+        id: "img_1215", title: "TBD", series: "", year: "todo", category: "oil",
+        medium: "Oil on canvas", dimensions: "Dimensions on request", status: "Private Collection",
+        description: "",
+        images: [
+          { key: "img_1215_main", label: "" }        ]
+      },
+      {
+        id: "img_1215", title: "TBD", series: "", year: "todo", category: "watercolor",
         medium: "Oil on canvas", dimensions: "Dimensions on request", status: "Private Collection",
         description: "",
         images: [

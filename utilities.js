@@ -26,11 +26,28 @@ function makeCard(art){
   return card;
 }
 
+
+function setToggleState(hidden){
+  const btn = document.getElementById('lb-info-toggle');
+  const tip = hidden ? CONTENT.ui.showInfo : CONTENT.ui.hideInfo;
+  btn.textContent = hidden ? '>' : '<';
+  btn.setAttribute('aria-pressed', hidden ? 'true' : 'false');
+  btn.setAttribute('aria-label', tip);
+  btn.dataset.tip = tip;
+}
+(function initTips(){
+  const c = document.getElementById('lb-close');
+  c.setAttribute('aria-label', CONTENT.ui.close);
+  c.dataset.tip = CONTENT.ui.close;
+  setToggleState(false);
+})();
+
+
+
 function openLightbox(art){
   const images = art.images;
   document.querySelector('.lb-card').classList.remove('info-hidden');
-  document.getElementById('lb-info-toggle').setAttribute('aria-pressed', 'false');
-  document.getElementById('lb-info-toggle').textContent = '<';
+  (false);setToggleState
 
   function setActive(idx){
     document.getElementById('lb-art').innerHTML = `<img src="${IMAGES[images[idx].key]}" alt="${art.title}">`;
@@ -76,11 +93,8 @@ document.getElementById('lb-close').addEventListener('click',
     });
 document.getElementById('lb-info-toggle').addEventListener('click', ()=>{
   const card = document.querySelector('.lb-card');
-  const btn = document.getElementById('lb-info-toggle');
-  const hidden = card.classList.toggle('info-hidden');
-  btn.textContent = hidden ? '>' : '<';
-  btn.setAttribute('aria-pressed', hidden ? 'true' : 'false');
-  btn.setAttribute('aria-label', hidden ? 'Show picture info' : 'Hide picture info');
+  setToggleState(card.classList.toggle('info-hidden'));
+
   forceSafariRedraw(document.getElementById('lightbox'))
   /*document.getElementById('lightbox').classList.remove('open');
   setTimeout(() => {
@@ -93,7 +107,7 @@ document.getElementById('lightbox').addEventListener('click', e=>{ if(e.target.i
 document.addEventListener('keydown', e=>{ if(e.key==='Escape') document.getElementById('lightbox').classList.remove('open'); });
 
 function renderWork(){
-  document.getElementById('gallery-title').textContent = CONTENT.artist.name + " — Work";
+  document.getElementById('gallery-title').textContent = "Art Showcase";
   document.getElementById('gallery-intro-text').textContent = CONTENT.artist.galleryIntro;
 
   const list = document.getElementById('group-list');
@@ -146,9 +160,10 @@ function renderAbout(){
     </div>
   `).join('');
 
-  document.getElementById('awards-list').innerHTML = CONTENT.awards.map(x=>`
+/*  document.getElementById('awards-list').innerHTML = CONTENT.awards.map(x=>`
     <li><span class="yr">${x.year}</span><span class="what">${x.what}</span></li>
   `).join('');
+*/
 }
 
 function renderContact(){
